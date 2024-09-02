@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ขนาดรถขนส่งสินค้า</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ขนาดรถขนส่งสินค้า</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ประเภท</th>
+                    <th>ความยาว (เมตร)</th>
+                    <th>ความกว้าง (เมตร)</th>
+                    <th>ความสูง (เมตร)</th>
+                    <th>ความจุ (ลูกบาศก์เมตร)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>รถบรรทุกเล็ก</td>
+                    <td>4.5</td>
+                    <td>2.0</td>
+                    <td>2.0</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>รถบรรทุกกลาง</td>
+                    <td>6.0</td>
+                    <td>2.5</td>
+                    <td>2.5</td>
+                    <td>37.5</td>
+                </tr>
+                <tr>
+                    <td>รถบรรทุกใหญ่</td>
+                    <td>8.0</td>
+                    <td>2.5</td>
+                    <td>3.0</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>รถเทรลเลอร์</td>
+                    <td>12.0</td>
+                    <td>2.5</td>
+                    <td>3.0</td>
+                    <td>90</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Classification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Vehicle Classification System</h1>
+<form id="classificationForm">
+    <div class="form-group">
+        <label for="width">Width (cm):</label>
+        <input type="number" id="width" name="width" required>
+    </div>
+    <div class="form-group">
+        <label for="length">Length (cm):</label>
+        <input type="number" id="length" name="length" required>
+    </div>
+    <div class="form-group">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" name="height" required>
+    </div>
+    <div class="form-group">
+        <label for="weight">Weight per package (kg):</label>
+        <input type="number" id="weight" name="weight" required>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Number of Packages:</label>
+        <input type="number" id="quantity" name="quantity" required>
+    </div>
+    <button type="button" onclick="classifyVehicle()">Classify Vehicle</button>
+</form>
+
+<div class="result" id="result"></div>
+
+<script>
+    function classifyVehicle() {
+        // Get input values
+        const width = parseFloat(document.getElementById('width').value);
+        const length = parseFloat(document.getElementById('length').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const weight = parseFloat(document.getElementById('weight').value);
+        const quantity = parseInt(document.getElementById('quantity').value);
+
+        // Calculate total volume and weight
+        const volumePerPackage = width * length * height;
+        const totalVolume = volumePerPackage * quantity;
+        const totalWeight = weight * quantity;
+
+        let vehicleType = '';
+        let vehicleCount = 1;
+
+        // Example logic for vehicle classification (modify as needed)
+        if (totalVolume <= 1000000 && totalWeight <= 1000) {
+            vehicleType = '4 wheels';
+        } else if (totalVolume <= 5000000 && totalWeight <= 5000) {
+            vehicleType = '6 wheels';
+        } else {
+            vehicleType = '10 wheels';
+        }
+
+        // Adjust vehicle count based on total weight (example logic)
+        if (totalWeight > 5000) {
+            vehicleCount = Math.ceil(totalWeight / 5000);
+        }
+
+        // Display result
+        document.getElementById('result').innerHTML = `
+            <h2>Vehicle Classification Result:</h2>
+            <p>Recommended Vehicle: <strong>${vehicleType}</strong></p>
+            <p>Number of Vehicles: <strong>${vehicleCount}</strong></p>
+        `;
+    }
+</script>
+
+</body>
+</html>
